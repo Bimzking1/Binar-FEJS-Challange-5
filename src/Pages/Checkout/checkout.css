@@ -42,9 +42,35 @@
     box-shadow: 0px 0px 20px -12px #2b2b2b;
 }
 
-.details-container-right{
+.banks-container{
+}
+
+.bank-container {
+    margin: 20px 0px;
+    display: flex;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.bank-button{
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    height: 40px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bank-text{
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.details-container-right-checkout{
     width: 35%;
-    height: 450px;
+    height: 550px;
     margin-left: 25px;
     border-radius: 20px;
     box-shadow: 0px 0px 20px -12px #2b2b2b;
@@ -81,6 +107,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 .button-right-details-container {
