@@ -1,12 +1,12 @@
-.upper-div-container{
+.upper-div-transfer{
     background-color: #F1F3FF;
     display: flex;
     justify-content: center;
-    height: 50px;
+    height: 100px;
     padding-top: 30px;
 }
 
-.button-back{
+.button-back-transfer{
     background-color: #F1F3FF;
     display: flex;
     align-items: center;
@@ -24,9 +24,10 @@
     font-weight: 600;
 }
 
-.details-container-main{
+.details-container-transfer{
     display: flex;
     justify-content: center;
+    margin-top: 40px;
 }
 
 .details-container {
@@ -34,17 +35,69 @@
     width: 80%;
 }
 
-.details-container-left {
+.details-transfer-left {
     width: 65%;
-    padding: 30px;
-    border-radius: 20px;
     /* border: 1px solid #8b8b8b; */
+}
+
+.details-transfer-left-upper{
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 20px;
     box-shadow: 0px 0px 20px -12px #2b2b2b;
 }
 
-.details-container-right{
+.banks-container{
+}
+
+.bank-container {
+    margin: 20px 0px;
+    display: flex;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.bank-button{
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    height: 40px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bank-text{
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.title-rekening{
+    margin-bottom: 20px;
+}
+
+.content{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    padding-left: 15px;
+    font-weight: 600;
+}
+
+.text-instruction{
+    margin-top: 20px;
+    color: #b4b4b4;
+}
+
+.car-transfer-price{
+    font-size: 14px;
+}
+
+.details-transfer-right-checkout{
     width: 35%;
-    height: 450px;
+    height: 150px;
     margin-left: 25px;
     border-radius: 20px;
     box-shadow: 0px 0px 20px -12px #2b2b2b;
@@ -81,6 +134,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 .button-right-details-container {

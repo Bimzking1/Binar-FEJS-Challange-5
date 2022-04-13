@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Accordion from 'react-bootstrap/Accordion'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './car.css'
+import './checkout.css'
 import PanelDisabled from '../../Components/PanelDisabled/PanelDisabled'
 import { Link } from 'react-router-dom'
 
@@ -11,7 +11,7 @@ import IconGear from "../../Assets/fi_settings.svg"
 import IconCalendar from "../../Assets/fi_calendar.svg"
 import Arrow from "../../Assets/fi_arrow-left.svg"
 
-const Car = (props) => {
+const Checkout = (props) => {
 
     const param = useParams()
     const [car, setCar] = useState(null)
@@ -33,12 +33,12 @@ const Car = (props) => {
             { car !== null &&
                 <>
                 <div className='upper-div-container'>
-                    <Link to="/" className='button-back'>
+                    <Link to={`/car/${car.id}`} className='button-back'>
                         <div className='arrow-image-container'>
                             <img src={Arrow} className='arrow-image'/>
                         </div>
                         <div className='arrow-text'>
-                            Kembali
+                            Pembayaran
                         </div>
                     </Link>
                 </div>
@@ -47,49 +47,39 @@ const Car = (props) => {
                         <div className='details-container'>
                             <div className='details-container-left'>
                                 <div className='details-container-left-upper'>
-                                    <p style={{fontSize:"16px", fontWeight:"600"}}>Tentang Paket</p>
-                                    <p>Include</p>
+                                    <p style={{fontSize:"16px", fontWeight:"600"}}>Pilih Bank Transfer</p>
+                                    <p>Kamu bisa membayar dengan transfer melalui ATM, Internet Banking, atau Mobile Banking</p>
 
-                                    <ul className="text-muted">
-                                        <li>Apa saja yang termasuk dalam paket misal durasi max 12 jam</li>
-                                        <li>Sudah termasuk bensin selama 12 jam</li>
-                                        <li>Sudah termasuk Tiket Wisata</li>
-                                        <li>Sudah termasuk pajak</li>
-                                    </ul>
-
-                                    <p>Exlude:</p>
-                                    <ul className="text-muted">
-                                        <li>Tidak termasuk biaya makan sopir Rp 75.000/hari</li>
-                                        <li>Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp 20.000/jam</li>
-                                        <li>Tidak termasuk akomodasi penginapan</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <Accordion defaultActiveKey="0">
-                                        <Accordion.Item eventKey="0">
-                                            <Accordion.Header>Refund, Reschedule, Overtime</Accordion.Header>
-                                            <Accordion.Body>
-                                                <ul className="text-muted">
-                                                    <li>Tidak termasuk biaya makan sopir Rp 75.000/hari</li>
-                                                    <li> Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp 20.000/jam</li>
-                                                    <li> Tidak termasuk akomodasi penginapan</li>
-                                                    <li> Tidak termasuk biaya makan sopir Rp 75.000/hari</li>
-                                                    <li>Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp 20.000/jam</li>
-                                                    <li> Tidak termasuk akomodasi penginapan</li>
-                                                    <li>Tidak termasuk biaya makan sopir Rp 75.000/hari</li>
-                                                    <li>Jika overtime lebih dari 12 jam akan ada tambahan biaya Rp 20.000/jam</li>
-                                                    <li> Tidak termasuk akomodasi penginapan</li>
-                                                </ul>
-                                            </Accordion.Body>
-                                        </Accordion.Item>
-                                    </Accordion>
+                                    <div className='banks-container'>
+                                        <div className='bank-container'>
+                                            <div className='bank-button'>
+                                                BCA
+                                            </div>
+                                            <div className='bank-text'>
+                                                BCA Transfer
+                                            </div>
+                                        </div>
+                                        <div className='bank-container'>
+                                            <div className='bank-button'>
+                                                BNI
+                                            </div>
+                                            <div className='bank-text'>
+                                                BNI Transfer
+                                            </div>
+                                        </div>
+                                        <div className='bank-container'>
+                                            <div className='bank-button'>
+                                                Mandiri
+                                            </div>
+                                            <div className='bank-text'>
+                                                Mandiri Transfer
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className='details-container-right'>
+                            <div className='details-container-right-checkout'>
                                 <div className='details-container-right-inner'>
-                                    <div className='car-image-container'>
-                                        <img src={car.image} className='car-image'/>
-                                    </div>
                                     <div className='car-name'>
                                         {car.name} / {car.category}
                                     </div>
@@ -127,10 +117,27 @@ const Car = (props) => {
                                             Rp. {car.price}
                                         </div>
                                     </div>
-                                    <Link to={`/checkout/${car.id}`} style={{textDecoration:"none", color:"#FBFAF5"}}>
+                                    <p>Include</p>
+                                    <ul className="text-muted">
+                                        <li>1 Mobil dengan sopir</li>
+                                    </ul>
+
+                                    <p>Biaya Lainnya</p>
+                                    <ul className="text-muted">
+                                        <li>Pajak</li>
+                                        <li>Biaya makan sopir</li>
+                                    </ul>
+
+                                    <p>Belum Termasuk</p>
+                                    <ul className="text-muted">
+                                        <li>Bensin</li>
+                                        <li>Tol dan parkir</li>
+                                    </ul>
+
+                                    <Link to={`/transfer/${car.id}`} style={{textDecoration:"none", color:"#FBFAF5"}}>
                                         <button className='btn button-right-details-container'>
                                             <div type="submit" className='button-right-details'>
-                                                Lanjutkan Pembayaran
+                                                Bayar
                                             </div>
                                         </button>
                                     </Link>
@@ -138,19 +145,10 @@ const Car = (props) => {
                             </div>
                         </div>
                     </div>
-                    <Link to={`/checkout/${car.id}`} style={{textDecoration:"none", color:"#FBFAF5"}}>
-                        <div className='button-center-container-outer'>
-                            <button className='btn button-center-container'>
-                                <div type="submit" className='button-center'>
-                                    Lanjutkan Pembayaran
-                                </div>
-                            </button>
-                        </div>
-                    </Link>
                 </>
             }
         </div>
     )
 }
 
-export default Car
+export default Checkout
