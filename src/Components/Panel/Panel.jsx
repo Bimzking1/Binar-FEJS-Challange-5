@@ -1,23 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Panel.css'
 import { Link } from "react-router-dom";
+import { useForm } from 'react-hook-form'
+import Car from '../../Components/Car/Car'
+import Navi from '../../Components/Navbar/Navbar'
 
 const Panel = (props) => {
+    
+//   const [item, setItem] = useState([])
+//   item = <Car/>
 
+    const { register, handleSubmit } = useForm()
+    const onSubmit = () => {
+        // setItem( () => {
+        //     const newState = <Navi/>
+        //     return newState
+        // })
+        fetch('https://rent-cars-api.herokuapp.com/customer/car')
+        .then( response => {
+            return response.json()
+        })
+        .then( data => {
+            props.setCarList([...data.filter( (item) => {
+                return true
+            })])
+            console.log('ini data api:', data)
+            console.log('ini data api:', data.name)
+        })
+    }
 
   return (
-    // <Panel show="true" cari="false"></Panel>
+      <>
+      {/* {item} */}
+      <Car/>
     <div className="search-bar-container">
-        <div className="search-bar">
-            <div className="search-bar-title">{!props.cari /* Apakah != 'false'*/ ? "Pencarianmu" : "AWAL"}</div>
-            {/* <h6 className="fw-bold px-4">{!props.show ? "Pencarianmu" : "AWAL"}</h6> */}
+        <form id="searc-movie" className="search-bar" onSubmit={handleSubmit(onSubmit)}>
 
+            <div className="search-bar-title">
+                {props.cari ? '' : 'Pencarianmu'}
+            </div>
 
-            {/* <div className={`search-bar-operations ${props.show ? "col-11" : "col-12"}`}> */}
             <div className='search-bar-operations'>
                 <div className="search-bar-operations-container">
                     <label className="form-label">Tipe Driver</label>
-                    <select id="disabledSelect" className="form-control" disabled={props.form}>
+                    <select id="tipe" className="form-control" disabled={props.form} {...register('tipe')}>
                         <option></option>
                         <option>Disabled select</option>
                     </select>
@@ -25,41 +51,30 @@ const Panel = (props) => {
                 
                 <div className="search-bar-operations-container">
                     <label className="form-label">Tanggal</label>
-                    <input type="date" className="form-control" disabled={props.form}/>
+                    <input id="date" type="date" className="form-control" disabled={props.form} {...register('date')}/>
                 </div>
 
                 <div className="search-bar-operations-container">
                     <label className="form-label">Waktu Jemput/Ambil</label>
-                    <input type="time" className="form-control"  disabled={props.form} />
+                    <input id="time" type="time" className="form-control"  disabled={props.form} {...register('time')}/>
                 </div>
 
                 <div className="search-bar-operations-container">
                     <label className="form-label">Jumlah Penumpang</label>
-                    <input type="number" className="form-control" disabled={props.form} />
+                    <input id="pass" type="number" className="form-control" disabled={props.form} {...register('pass')}/>
                 </div>
                 
-                <div className='btn button-cari-container'>
-                    <Link to='/cari' className='button-cari'>
-                        <small>
-                            {!props.cari ? "Edit" /*INI TRUE*/ : "Cari mobil" /*INI FALSE*/ }
-                        </small>
-                    </Link>
-                </div>
+                <button className='btn button-cari-container'>
+                    <div type="submit" className='button-cari'>
+                        Cari Mobil
+                    </div>
+                </button>
             </div>
-           
-            {/* <div className={props.show ? 'col-1 px-0' : 'd-none'}> */}
-            {/* <div className='button-cari'>
-                <Link to='/cari' className={`btn ${props.edit ? 'btn btn-outline-primary' : 'btn-warning'} mt-5`}>
-                    <small>
-                        {!props.cari ? "Edit" : "Cari mobil" }
-                    </small>
-                </Link>
-            </div> */}
-        </div>
+        </form>
 
         <div className="spacer"></div>
     </div>
-   
+    </>
   )
 }
 
