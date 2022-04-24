@@ -7,7 +7,14 @@ import IconPeople from "../Assets/fi_users.svg"
 import IconGear from "../Assets/fi_settings.svg"
 import IconCalendar from "../Assets/fi_calendar.svg"
 
+import carCartSlice from "../Store/carCartSlice";
+import { useSelector, useDispatch } from "react-redux";
+
 const CarCard = (props) => {
+
+  const carCartSlice = useSelector((store) => store.carCartSlice.carCart);
+  const dispatch = useDispatch();
+
   return (
     <div className='car_card'>
       <div className='car-image-container'>
@@ -15,7 +22,7 @@ const CarCard = (props) => {
       </div>
       <div className='car-detail-container'>
         <div className='car-name-type'>
-          {props.car.name} / {props.car.category}
+          {props.car.name}
         </div>
         <div className='car-price'>
           Rp. {props.car.price} / hari
@@ -28,7 +35,7 @@ const CarCard = (props) => {
             <img src={IconPeople} className='car-icon'/>
           </div>
           <div className='car-detail-text'>
-            4 orang
+            {props.car.passenger} Passenger
           </div>
         </div>
         <div className='car-detail-icons'>
@@ -36,7 +43,7 @@ const CarCard = (props) => {
             <img src={IconGear} className='car-icon'/>
           </div>
           <div className='car-detail-text'>
-            Manual
+            {props.car.transmission}
           </div>
         </div>
         <div className='car-detail-icons'>
@@ -44,12 +51,14 @@ const CarCard = (props) => {
             <img src={IconCalendar} className='car-icon'/>
           </div>
           <div className='car-detail-text'>
-            Tahun 2020
+            Tahun {props.car.year}
           </div>
         </div>
-        <button className='button-card-container'>
-          <div type="submit" className='button-card'>
-              Pilih Mobil
+        <button
+          className="button-card-container" disabled={carCartSlice === props.car.id}
+        >
+          <div type="submit" className="button-card">
+            {carCartSlice === props.car.id ? "Lanjutkan Pembayaran" : "Pilih mobil"}
           </div>
         </button>
       </div>

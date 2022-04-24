@@ -11,13 +11,19 @@ import IconGear from "../../Assets/fi_settings.svg"
 import IconCalendar from "../../Assets/fi_calendar.svg"
 import Arrow from "../../Assets/fi_arrow-left.svg"
 
+import { useDispatch, useSelector } from "react-redux";
+import carCartSlice from "../../Store/carCartSlice";
+
 const Car = (props) => {
 
     const param = useParams()
     const [car, setCar] = useState(null)
 
+    const carCart = useSelector((store) => store.carCartSlice.carCart);
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        fetch(`https://rent-cars-api.herokuapp.com/customer/car/${param.id}`)
+        fetch(`https://625d73e74c36c753577540cb.mockapi.io/fejs2/api/c5-cars/${param.id}`)
         .then( response => {
             return response.json()
         })
@@ -28,8 +34,6 @@ const Car = (props) => {
 
     return (
         <div>
-            {/* <h1>Car Name: {car.name}</h1>
-            <p>{car.category}</p> */}
             { car !== null &&
                 <>
                 <div className='upper-div-container'>
@@ -91,7 +95,7 @@ const Car = (props) => {
                                         <img src={car.image} className='car-image'/>
                                     </div>
                                     <div className='car-name'>
-                                        {car.name} / {car.category}
+                                        {car.name}
                                     </div>
                                     <div className='car-details-container'>
                                         <div className='car-detail-icons'>
@@ -99,7 +103,7 @@ const Car = (props) => {
                                                 <img src={IconPeople} className='car-icon'/>
                                             </div>
                                             <div className='car-book-text'>
-                                                4 orang
+                                                {car.passenger} Passenger
                                             </div>
                                         </div>
                                         <div className='car-detail-icons'>
@@ -107,7 +111,7 @@ const Car = (props) => {
                                                 <img src={IconGear} className='car-icon'/>
                                             </div>
                                             <div className='car-book-text'>
-                                                Manual
+                                                {car.transmission}
                                             </div>
                                         </div>
                                         <div className='car-detail-icons'>
@@ -115,7 +119,7 @@ const Car = (props) => {
                                                 <img src={IconCalendar} className='car-icon'/>
                                             </div>
                                             <div className='car-book-text'>
-                                                Tahun 2020
+                                                Tahun {car.year}
                                             </div>
                                         </div>
                                     </div>
@@ -127,26 +131,34 @@ const Car = (props) => {
                                             Rp. {car.price}
                                         </div>
                                     </div>
-                                    <Link to={`/checkout/${car.id}`} style={{textDecoration:"none", color:"#FBFAF5"}}>
-                                        <button className='btn button-right-details-container'>
-                                            <div type="submit" className='button-right-details'>
-                                                Lanjutkan Pembayaran
-                                            </div>
-                                        </button>
-                                    </Link>
+                                    <button
+                                        className="btn button-right-details-container"
+                                        disabled={carCart === car.id}
+                                        onClick = { () => 
+                                            dispatch( carCartSlice.actions.addCarToCart({ id: car.id }) )
+                                        }
+                                    >
+                                        <div type="submit" className="button-right-details">
+                                            {carCart === car.id ? "Lanjutkan Pembayaran" : "Pilih mobil"}
+                                        </div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <Link to={`/checkout/${car.id}`} style={{textDecoration:"none", color:"#FBFAF5"}}>
-                        <div className='button-center-container-outer'>
-                            <button className='btn button-center-container'>
-                                <div type="submit" className='button-center'>
-                                    Lanjutkan Pembayaran
-                                </div>
-                            </button>
-                        </div>
-                    </Link>
+                    <div className="button-center-container-outer">
+                        <button
+                            className="btn button-center-container"
+                            disabled={carCart === car.id}
+                            onClick = { () => 
+                                dispatch( carCartSlice.actions.addCarToCart({ id: car.id }) )
+                            }
+                        >
+                            <div type="submit" className="button-center">
+                                {carCart === car.id ? "Lanjutkan Pembayaran" : "Pilih mobil"}
+                            </div>
+                        </button>
+                    </div>
                 </>
             }
         </div>
