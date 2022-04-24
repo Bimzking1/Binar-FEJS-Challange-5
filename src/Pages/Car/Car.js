@@ -103,7 +103,7 @@ const Car = (props) => {
                                                 <img src={IconPeople} className='car-icon'/>
                                             </div>
                                             <div className='car-book-text'>
-                                                {car.passenger} Passenger
+                                                {car.passenger} passenger
                                             </div>
                                         </div>
                                         <div className='car-detail-icons'>
